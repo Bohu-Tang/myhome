@@ -20,6 +20,12 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
+      - name: Build project
+        run: |
+          npm install
+          npm run build
+
+
       - name: Deploy to server
         env:
           DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
@@ -27,4 +33,4 @@ jobs:
           HOST: ${{ secrets.HOST }}
           PORT: ${{ secrets.PORT }}
         run: |
-          rsync -avz --delete --exclude='.git/' -e "ssh -i ~/.ssh/deploy_key -p $PORT" ./ $USERNAME@$HOST:/bohu/myhome
+          rsync -avz --delete --exclude='.git/' -e "ssh -i ~/.ssh/deploy_key -p $PORT" ./dist/ $USERNAME@$HOST:/bohu/myhome
