@@ -57,9 +57,25 @@ function App() {
     };
 
     useEffect(() => {
-        const getTheme = checkNightMode();
-        setTheme(getTheme);
-    }, [])
+        const storedTheme = localStorage.getItem("theme"); // 从localStorage中获取已存储的主题
+        if (storedTheme) {
+            setTheme(storedTheme); // 如果存在，直接设置主题
+            if (storedTheme === "dark") {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        } else {
+            const getTheme = checkNightMode(); // 获取基于时间的主题
+            setTheme(getTheme);
+            localStorage.setItem("theme", getTheme); // 设置并存储主题
+            if (getTheme === "dark") {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+    }, []);
 
 
     return (
