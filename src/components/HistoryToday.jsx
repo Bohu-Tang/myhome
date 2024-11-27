@@ -23,8 +23,6 @@ function Content() {
         ),
   })
 
-  console.log(data)
-
   const list = data && data.data ? data.data : [];
 
   return (
