@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import Zhihu from './components/zhihu.jsx'
 
 function isUrl(str) {
     const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/\S*)?$/;
@@ -125,6 +126,12 @@ function App() {
                 >
                     搜索
                 </button>
+            </div>
+
+            {/*资讯区*/}
+            <div className={"flex justify-center w-1/2  h-80 mx-auto border border-gray-50"}>
+                <Zhihu />
+
             </div>
         </div>
     );
