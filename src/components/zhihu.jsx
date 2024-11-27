@@ -28,20 +28,36 @@ function Content() {
 
 
   return (
-      <div className="w-1/3 border border-gray-50 text-slate-500 dark:text-gray-300 text-center box-border px-2.5">
-        <div className="font-bold">知乎热榜</div>
+      <div className="w-1/3 border border-gray-50 text-slate-500 dark:text-gray-300 box-border px-2.5">
+        <div className="font-bold text-center">知乎热榜</div>
         <div
-            className="h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800 mt-3"
+            className="h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800 mt-3 overflow-x-hidden"
         >
-          {isLoading ? <div>加载中</div> : ""}
+          {isLoading ? <div className="text-center">加载中</div> : ""}
           {error ? <div>{error}</div> : ""}
           {list?.map((item, index) => (
               <div className="text-sm" key={index}>
-                <a href={item.link} target="_blank" rel="noreferrer"
-                   className="block truncate cursor-pointer hover:text-slate-600">
-                  {index + 1 + "." + item.title}
-                </a>
+                <div className="relative group">
+                  <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block truncate cursor-pointer text-slate-500 dark:text-gray-300 hover:text-slate-600 dark:hover:text-gray-100"
+                  >
+                    {index + 1 + ". " + item.title}
+                  </a>
+                  {/* 气泡框 */}
+                  <div
+                      className="absolute left-0 top-full mt-1 hidden group-hover:block w-max max-w-[calc(100%-8px)]
+                bg-white dark:bg-gray-800 text-slate-500 dark:text-gray-300
+                text-xs rounded-lg p-2 shadow-lg border border-gray-50 dark:border-gray-600 z-10"
+                  >
+                    {item.title}
+                  </div>
+                </div>
               </div>
+
+
           ))}
         </div>
 
