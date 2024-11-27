@@ -6,7 +6,7 @@ import {
 
 const queryClient = new QueryClient();
 
-function Zhihu() {
+function HistoryToday() {
   return (
       <QueryClientProvider client={queryClient}>
         <Content/>
@@ -18,18 +18,18 @@ function Content() {
   const {isLoading, error, data} = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
-        fetch('https://60s.viki.moe/zhihu-hot').then((res) =>
+        fetch('https://60s.viki.moe/today_in_history').then((res) =>
             res.json(),
         ),
   })
 
-  console.log(data);
+  console.log(data)
+
   const list = data && data.data ? data.data : [];
 
-
   return (
-      <div className="w-1/3 border border-gray-50 text-slate-500 dark:text-gray-300 box-border px-2.5">
-        <div className="font-bold text-center">知乎热榜</div>
+      <div className="w-1/3 border border-slate-300 dark:border-gray-600 rounded text-slate-500 dark:text-gray-300 box-border px-2.5">
+        <div className="font-bold text-center">历史上的今天</div>
         <div
             className="h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800 mt-3 overflow-x-hidden"
         >
@@ -65,4 +65,4 @@ function Content() {
   );
 }
 
-export default Zhihu;
+export default HistoryToday;

@@ -1,5 +1,7 @@
 import {useState, useEffect} from "react";
-import Zhihu from './components/zhihu.jsx'
+import Zhihu from './components/Zhihu.jsx';
+import Day60 from "./components/Day60.jsx";
+import HistoryToday from "./components/HistoryToday.jsx";
 
 function isUrl(str) {
     const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/\S*)?$/;
@@ -83,7 +85,7 @@ function App() {
         <div className="h-screen bg-slate-200 dark:bg-gray-800 transition-colors">
             {/* 顶部菜单 */}
             <div
-                className="text-slate-950 dark:text-gray-200 h-12 bg-slate-300 dark:bg-gray-900 flex items-center justify-end px-5">
+                className="text-slate-500 dark:text-gray-300 h-12 bg-slate-300 dark:bg-gray-900 flex items-center justify-end px-5">
                 <div className="px-2 cursor-pointer text-sm" onClick={setDark}>
                     {theme === "light" ? "夜间模式" : "日间模式"}
                 </div>
@@ -129,8 +131,10 @@ function App() {
             </div>
 
             {/*资讯区*/}
-            <div className={"flex justify-center w-1/2  h-80 mx-auto border border-gray-50"}>
+            <div className={"flex justify-center w-1/2  h-80 mx-auto border border-slate-300 dark:border-gray-600 rounded"}>
+                <Day60 />
                 <Zhihu />
+                <HistoryToday />
 
             </div>
         </div>
