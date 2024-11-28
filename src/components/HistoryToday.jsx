@@ -29,7 +29,7 @@ function Content() {
       <div className="w-1/3 border border-slate-300 dark:border-gray-600 rounded text-slate-500 dark:text-gray-300 box-border px-2.5">
         <div className="font-bold text-center">历史上的今天</div>
         <div
-            className="h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800 mt-3 overflow-x-hidden"
+            className="h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800 mt-3 overflow-x-hidden box-border pb-16"
         >
           {isLoading ? <div className="text-center">加载中</div> : ""}
           {error ? <div>{error}</div> : ""}
