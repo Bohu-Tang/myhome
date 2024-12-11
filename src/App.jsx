@@ -140,9 +140,12 @@ function App() {
         {/* 页面底部备案信息 */}
         <footer
             className="fixed bottom-0 left-0 w-full h-12 flex items-center justify-center bg-slate-300 dark:bg-gray-900 text-slate-500 dark:text-gray-300 text-sm">
+
+          <img src="/src/assets/beian.png" className="w-4 h-4 ml-3 mr-2"/>
+          <a  className="mr-4" href="https://beian.mps.gov.cn/#/query/webSearch?code=31011502402342" rel="noreferrer"
+             target="_blank">沪公网安备31011502402342</a>
           <a href="https://beian.miit.gov.cn/" target="_blank">
             鲁 ICP 备 19013167 号
-
           </a>
         </footer>
 
