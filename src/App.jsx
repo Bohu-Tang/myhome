@@ -3,6 +3,8 @@ import Zhihu from './components/Zhihu.jsx';
 import Day60 from "./components/Day60.jsx";
 import HistoryToday from "./components/HistoryToday.jsx";
 
+import beian from './assets/beian.png'
+
 function isUrl(str) {
   const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/\S*)?$/;
   return urlPattern.test(str);
@@ -141,7 +143,7 @@ function App() {
         <footer
             className="fixed bottom-0 left-0 w-full h-12 flex items-center justify-center bg-slate-300 dark:bg-gray-900 text-slate-500 dark:text-gray-300 text-sm">
 
-          <img src="/src/assets/beian.png" className="w-4 h-4 ml-3 mr-2"/>
+          <img src={beian} className="w-4 h-4 ml-3 mr-2"/>
           <a  className="mr-4" href="https://beian.mps.gov.cn/#/query/webSearch?code=31011502402342" rel="noreferrer"
              target="_blank">沪公网安备31011502402342</a>
           <a href="https://beian.miit.gov.cn/" target="_blank">
