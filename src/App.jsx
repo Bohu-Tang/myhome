@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Zhihu from './components/Zhihu.jsx';
 import Day60 from "./components/Day60.jsx";
 import HistoryToday from "./components/HistoryToday.jsx";
@@ -44,7 +44,11 @@ function App() {
     if (isUrl(searchText)) {
       window.open("http://" + searchText);
     } else {
-      window.open(searchEngineList[searchEngine] + encodeURIComponent(searchText.trim()));
+      if (searchEngine === "Baidu") {
+        window.open(searchEngineList[searchEngine] + encodeURIComponent(searchText.trim() + " -李彦宏"));
+      } else {
+        window.open(searchEngineList[searchEngine] + encodeURIComponent(searchText.trim()));
+      }
     }
   };
 
@@ -84,75 +88,75 @@ function App() {
 
 
   return (
-      <div className="h-screen bg-slate-200 dark:bg-gray-800 transition-colors">
-        {/* 顶部菜单 */}
-        <div
-            className="text-slate-500 dark:text-gray-300 h-12 bg-slate-300 dark:bg-gray-900 flex items-center justify-end px-5">
-          <div className="px-2 cursor-pointer text-sm" onClick={setDark}>
-            {theme === "light" ? "夜间模式" : "日间模式"}
-          </div>
+    <div className="h-screen bg-slate-200 dark:bg-gray-800 transition-colors">
+      {/* 顶部菜单 */}
+      <div
+        className="text-slate-500 dark:text-gray-300 h-12 bg-slate-300 dark:bg-gray-900 flex items-center justify-end px-5">
+        <div className="px-2 cursor-pointer text-sm" onClick={setDark}>
+          {theme === "light" ? "夜间模式" : "日间模式"}
         </div>
+      </div>
 
-        {/* 中间文字 */}
-        <div className="flex items-center justify-center mt-20">
-          <span className="text-7xl text-slate-500 dark:text-gray-300 p-5">{searchEngine}</span>
-        </div>
+      {/* 中间文字 */}
+      <div className="flex items-center justify-center mt-20">
+        <span className="text-7xl text-slate-500 dark:text-gray-300 p-5">{searchEngine}</span>
+      </div>
 
-        {/* 搜索框 */}
-        <div className="w-full h-20 flex items-center justify-center">
-          <select
-              className="h-12 border-2 border-slate-300 dark:border-gray-600 rounded-l-full px-3 bg-white dark:bg-gray-700 text-slate-500 dark:text-gray-200 outline-none"
-              value={searchEngine}
-              onChange={(e) => setSearchEngine(e.target.value)}
-          >
-            <option className="text-slate-500" value="Google">Google</option>
-            <option className="text-slate-500" value="Bing">Bing</option>
-            <option className="text-slate-500" value="Baidu">Baidu</option>
-            <option className="text-slate-500" value="Yandex">Yandex</option>
-          </select>
+      {/* 搜索框 */}
+      <div className="w-full h-20 flex items-center justify-center">
+        <select
+          className="h-12 border-2 border-slate-300 dark:border-gray-600 rounded-l-full px-3 bg-white dark:bg-gray-700 text-slate-500 dark:text-gray-200 outline-none"
+          value={searchEngine}
+          onChange={(e) => setSearchEngine(e.target.value)}
+        >
+          <option className="text-slate-500" value="Google">Google</option>
+          <option className="text-slate-500" value="Bing">Bing</option>
+          <option className="text-slate-500" value="Baidu">Baidu</option>
+          <option className="text-slate-500" value="Yandex">Yandex</option>
+        </select>
 
-          <input
-              type="text"
-              className="w-1/3 h-12 border-t-2 border-b-2 border-slate-300 dark:border-gray-600 px-5 bg-white dark:bg-gray-700 text-slate-500 dark:text-gray-200 outline-none"
-              placeholder="搜索或输入 URL"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  goSearch();
-                }
-              }}
-          />
+        <input
+          type="text"
+          className="w-1/3 h-12 border-t-2 border-b-2 border-slate-300 dark:border-gray-600 px-5 bg-white dark:bg-gray-700 text-slate-500 dark:text-gray-200 outline-none"
+          placeholder="搜索或输入 URL"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              goSearch();
+            }
+          }}
+        />
 
-          <button
-              className="h-12 border-2 border-slate-300 dark:border-gray-600 rounded-r-full px-5 bg-slate-300 dark:bg-gray-700 text-white dark:text-gray-200 hover:bg-slate-400 dark:hover:bg-gray-600"
-              onClick={goSearch}
-          >
-            搜索
-          </button>
-        </div>
+        <button
+          className="h-12 border-2 border-slate-300 dark:border-gray-600 rounded-r-full px-5 bg-slate-300 dark:bg-gray-700 text-white dark:text-gray-200 hover:bg-slate-400 dark:hover:bg-gray-600"
+          onClick={goSearch}
+        >
+          搜索
+        </button>
+      </div>
 
-        {/*资讯区*/}
-        <div className={"flex justify-center w-1/2  h-80 mx-auto border border-slate-300 dark:border-gray-600 rounded"}>
-          <Day60/>
-          <Zhihu/>
-          <HistoryToday/>
-
-        </div>
-        {/* 页面底部备案信息 */}
-        <footer
-            className="fixed bottom-0 left-0 w-full h-12 flex items-center justify-center bg-slate-300 dark:bg-gray-900 text-slate-500 dark:text-gray-300 text-sm">
-
-          <img src={beian} className="w-4 h-4 ml-3 mr-2"/>
-          <a  className="mr-4" href="https://beian.mps.gov.cn/#/query/webSearch?code=31011502402342" rel="noreferrer"
-             target="_blank">沪公网安备31011502402342</a>
-          <a href="https://beian.miit.gov.cn/" target="_blank">
-            鲁 ICP 备 19013167 号
-          </a>
-        </footer>
-
+      {/*资讯区*/}
+      <div className={"flex justify-center w-1/2  h-80 mx-auto border border-slate-300 dark:border-gray-600 rounded"}>
+        <Day60 />
+        <Zhihu />
+        <HistoryToday />
 
       </div>
+      {/* 页面底部备案信息 */}
+      <footer
+        className="fixed bottom-0 left-0 w-full h-12 flex items-center justify-center bg-slate-300 dark:bg-gray-900 text-slate-500 dark:text-gray-300 text-sm">
+
+        <img src={beian} className="w-4 h-4 ml-3 mr-2" />
+        <a className="mr-4" href="https://beian.mps.gov.cn/#/query/webSearch?code=31011502402342" rel="noreferrer"
+          target="_blank">沪公网安备31011502402342</a>
+        <a href="https://beian.miit.gov.cn/" target="_blank">
+          鲁 ICP 备 19013167 号
+        </a>
+      </footer>
+
+
+    </div>
   );
 }
 
